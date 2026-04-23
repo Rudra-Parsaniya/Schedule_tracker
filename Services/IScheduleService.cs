@@ -8,5 +8,7 @@ namespace schedule_tracker.Services
         Task<ScheduleDto?> AddScheduleAsync(int userId, ScheduleDto scheduleDto);
         Task<bool> UpdateScheduleAsync(int userId, int id, ScheduleDto scheduleDto);
         Task<bool> DeleteScheduleAsync(int userId, int id);
+        Task<IEnumerable<ScheduleTodayDto>> GetTodayScheduleAsync(int userId);
+        Task<bool> CompleteTaskAsync(int userId, int templateId);
     }
 }

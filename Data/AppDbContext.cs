@@ -10,6 +10,8 @@ namespace schedule_tracker.Data
 
         public DbSet<Models.User> Users { get; set; }
         public DbSet<Models.ScheduleTemplate> ScheduleTemplates { get; set; }
+        public DbSet<Models.TaskCompletion> TaskCompletions { get; set; }
+        public DbSet<Models.Reminder> Reminders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -32,6 +32,14 @@ namespace schedule_tracker.Controllers
             return Ok(schedules);
         }
 
+        [HttpGet("today")]
+        public async Task<IActionResult> GetToday()
+        {
+            var userId = GetUserId();
+            var schedules = await _scheduleService.GetTodayScheduleAsync(userId);
+            return Ok(schedules);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(ScheduleDto scheduleDto)
         {

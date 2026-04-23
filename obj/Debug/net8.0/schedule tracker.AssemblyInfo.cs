@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("schedule tracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b96cdb42c3bd1ecd7dfd63eea50f8bd521714706")]
 [assembly: System.Reflection.AssemblyProductAttribute("schedule tracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("schedule tracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
