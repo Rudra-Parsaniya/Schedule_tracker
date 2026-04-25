@@ -166,3 +166,5 @@ C:\Users\parsa\OneDrive\Desktop\kaik che\schedule tracker\bin\Debug\net8.0\sv\Ha
 C:\Users\parsa\OneDrive\Desktop\kaik che\schedule tracker\bin\Debug\net8.0\tr-TR\Hangfire.Core.resources.dll
 C:\Users\parsa\OneDrive\Desktop\kaik che\schedule tracker\bin\Debug\net8.0\zh-TW\Hangfire.Core.resources.dll
 C:\Users\parsa\OneDrive\Desktop\kaik che\schedule tracker\bin\Debug\net8.0\zh\Hangfire.Core.resources.dll
+C:\Users\parsa\OneDrive\Desktop\kaik che\schedule tracker\bin\Debug\net8.0\client\package-lock.json
+C:\Users\parsa\OneDrive\Desktop\kaik che\schedule tracker\bin\Debug\net8.0\client\package.json

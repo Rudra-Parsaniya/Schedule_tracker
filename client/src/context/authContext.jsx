@@ -21,9 +21,9 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await api.post('/auth/login', { email, password });
-      const { token, user } = response.data;
+      const { token, email: userEmail } = response.data;
       localStorage.setItem('token', token);
-      setUser(user || { token });
+      setUser({ token, email: userEmail });
       return { success: true };
     } catch (error) {
       return { success: false, error: error.response?.data?.message || 'Login failed' };
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (userData) => {
     try {
-      await api.post('/auth/signup', userData);
+      await api.post('/auth/register', userData);
       return { success: true };
     } catch (error) {
       return { success: false, error: error.response?.data?.message || 'Signup failed' };

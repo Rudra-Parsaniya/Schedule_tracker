@@ -10,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<schedule_tracker.Data.AppDbContext>(options =>
@@ -67,6 +77,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHangfireDashboard();
+
+app.UseCors("AllowReactApp");
 
 app.UseHttpsRedirection();
 
