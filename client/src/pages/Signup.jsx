@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +16,7 @@ const Signup = () => {
     gender: '',
   });
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { signup } = useAuth();
   const navigate = useNavigate();
 
@@ -23,7 +27,9 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsSubmitting(true);
     const result = await signup(formData);
+    setIsSubmitting(false);
     if (result.success) {
       navigate('/login');
     } else {
@@ -32,48 +38,48 @@ const Signup = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
-      <div className="glass p-10 rounded-3xl">
-        <h2 className="text-3xl font-bold mb-2 text-center text-slate-800">Create Account</h2>
-        <p className="text-slate-500 text-center mb-8">Join thousands of productive users today.</p>
+    <div className="max-w-2xl mx-auto mt-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <Card className="p-8 sm:p-10 shadow-xl shadow-slate-200/50">
+        <div className="text-center mb-8">
+          <div className="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-500/30">
+             <span className="text-white font-black text-xl">ST</span>
+          </div>
+          <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Create Account</h2>
+          <p className="text-slate-500 mt-2">Join thousands of productive users today.</p>
+        </div>
         
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm">
+          <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm font-medium flex items-center gap-2">
+            <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
-            <input 
-              name="name"
-              type="text" 
-              className="input-field" 
-              placeholder="John Doe"
-              value={formData.name}
-              onChange={handleChange}
-              required 
-            />
-          </div>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+          <Input 
+            name="name"
+            label="Full Name"
+            placeholder="John Doe"
+            value={formData.name}
+            onChange={handleChange}
+            required 
+            containerClassName="md:col-span-2"
+          />
+
+          <Input 
+            name="dob"
+            type="date"
+            label="Date of Birth"
+            value={formData.dob}
+            onChange={handleChange}
+            required 
+          />
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Date of Birth</label>
-            <input 
-              name="dob"
-              type="date" 
-              className="input-field" 
-              value={formData.dob}
-              onChange={handleChange}
-              required 
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Gender</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Gender</label>
             <select 
               name="gender"
-              className="input-field"
+              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
               value={formData.gender}
               onChange={handleChange}
               required
@@ -85,37 +91,32 @@ const Signup = () => {
             </select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Mobile Number</label>
-            <input 
-              name="mobile"
-              type="tel" 
-              className="input-field" 
-              placeholder="+1 234 567 890"
-              value={formData.mobile}
-              onChange={handleChange}
-              required 
-            />
-          </div>
+          <Input 
+            name="mobile"
+            type="tel"
+            label="Mobile Number"
+            placeholder="+1 234 567 890"
+            value={formData.mobile}
+            onChange={handleChange}
+            required 
+          />
 
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
-            <input 
-              name="email"
-              type="email" 
-              className="input-field" 
-              placeholder="you@example.com"
-              value={formData.email}
-              onChange={handleChange}
-              required 
-            />
-          </div>
+          <Input 
+            name="email"
+            type="email"
+            label="Email Address"
+            placeholder="you@example.com"
+            value={formData.email}
+            onChange={handleChange}
+            required 
+          />
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-700 mb-2">Address</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Address</label>
             <textarea 
               name="address"
-              className="input-field h-24 pt-3" 
+              className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all resize-none"
+              rows="3"
               placeholder="123 Main St, City, Country"
               value={formData.address}
               onChange={handleChange}
@@ -123,31 +124,29 @@ const Signup = () => {
             ></textarea>
           </div>
 
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
-            <input 
-              name="password"
-              type="password" 
-              className="input-field" 
-              placeholder="••••••••"
-              value={formData.password}
-              onChange={handleChange}
-              required 
-            />
-          </div>
+          <Input 
+            name="password"
+            type="password"
+            label="Password"
+            placeholder="••••••••"
+            value={formData.password}
+            onChange={handleChange}
+            required 
+            containerClassName="md:col-span-2"
+          />
 
-          <div className="md:col-span-2">
-            <button type="submit" className="btn-primary w-full py-4 mt-2">
+          <div className="md:col-span-2 pt-2">
+            <Button type="submit" fullWidth isLoading={isSubmitting}>
               Create Account
-            </button>
+            </Button>
           </div>
         </form>
 
         <p className="mt-8 text-center text-slate-500 text-sm">
           Already have an account?{' '}
-          <Link to="/login" className="text-primary font-semibold hover:underline">Sign in</Link>
+          <Link to="/login" className="text-brand-600 font-semibold hover:underline">Sign in</Link>
         </p>
-      </div>
+      </Card>
     </div>
   );
 };

@@ -25,10 +25,10 @@ namespace schedule_tracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string? search, [FromQuery] string? category, [FromQuery] string? priority, [FromQuery] bool? completed, [FromQuery] DateTime? date, [FromQuery] string? sortBy)
         {
             var userId = GetUserId();
-            var schedules = await _scheduleService.GetSchedulesByUserIdAsync(userId);
+            var schedules = await _scheduleService.GetSchedulesAsync(userId, search, category, priority, completed, date, sortBy);
             return Ok(schedules);
         }
 

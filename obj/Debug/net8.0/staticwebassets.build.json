@@ -1,12 +1,20 @@
 {
   "Version": 1,
-  "Hash": "7Ki9Rw2qs8Q+n2SJW7/1502RDWA4EiHKbP/4yRSFJmQ=",
+  "Hash": "pvUs0noVpSjXiLiYVaoBPmqPd9DTQ5xFdeJSnl2Mjfc=",
   "Source": "schedule tracker",
   "BasePath": "_content/schedule tracker",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "schedule tracker\\wwwroot",
+      "Source": "schedule tracker",
+      "ContentRoot": "C:\\Users\\parsa\\OneDrive\\Desktop\\main\\kaik che\\schedule tracker\\wwwroot\\",
+      "BasePath": "_content/schedule tracker",
+      "Pattern": "**"
+    }
+  ],
   "Assets": [],
   "Endpoints": []
 }

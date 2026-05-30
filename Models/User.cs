@@ -35,5 +35,8 @@ namespace schedule_tracker.Models
         public string Gender { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [MaxLength(500)]
+        public string ProfileImagePath { get; set; } = string.Empty;
     }
 }

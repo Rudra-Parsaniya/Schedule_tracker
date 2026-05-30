@@ -21,6 +21,12 @@ namespace schedule_tracker.Models
         [Required]
         public TimeSpan Time { get; set; }
 
+        [MaxLength(50)]
+        public string Category { get; set; } = "General";
+
+        [MaxLength(20)]
+        public string Priority { get; set; } = "Medium";
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

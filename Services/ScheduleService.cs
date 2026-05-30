@@ -36,7 +36,9 @@ namespace schedule_tracker.Services
             {
                 UserId = userId,
                 TaskName = scheduleDto.TaskName,
-                Time = time
+                Time = time,
+                Category = scheduleDto.Category,
+                Priority = scheduleDto.Priority
             };
 
             _context.ScheduleTemplates.Add(schedule);
@@ -56,6 +58,8 @@ namespace schedule_tracker.Services
 
             schedule.TaskName = scheduleDto.TaskName;
             schedule.Time = time;
+            schedule.Category = scheduleDto.Category;
+            schedule.Priority = scheduleDto.Priority;
 
             await _context.SaveChangesAsync();
             return true;
@@ -75,22 +79,54 @@ namespace schedule_tracker.Services
 
         public async Task<IEnumerable<ScheduleTodayDto>> GetTodayScheduleAsync(int userId)
         {
-            var today = DateTime.UtcNow.Date;
-            var templates = await _context.ScheduleTemplates
-                .Where(s => s.UserId == userId)
-                .ToListAsync();
+            return await GetSchedulesAsync(userId, null, null, null, null, DateTime.UtcNow.Date, null);
+        }
+
+        public async Task<IEnumerable<ScheduleTodayDto>> GetSchedulesAsync(int userId, string? search, string? category, string? priority, bool? completed, DateTime? date, string? sortBy)
+        {
+            var targetDate = date ?? DateTime.UtcNow.Date;
+            
+            var query = _context.ScheduleTemplates.Where(s => s.UserId == userId).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+                query = query.Where(s => s.TaskName.Contains(search));
+
+            if (!string.IsNullOrWhiteSpace(category))
+                query = query.Where(s => s.Category == category);
+
+            if (!string.IsNullOrWhiteSpace(priority))
+                query = query.Where(s => s.Priority == priority);
+
+            var templates = await query.ToListAsync();
 
             var completions = await _context.TaskCompletions
-                .Where(c => templates.Select(t => t.Id).Contains(c.TemplateId) && c.Date == today)
+                .Where(c => templates.Select(t => t.Id).Contains(c.TemplateId) && c.Date == targetDate)
                 .ToListAsync();
 
-            return templates.Select(t => new ScheduleTodayDto
+            var result = templates.Select(t => new ScheduleTodayDto
             {
                 Id = t.Id,
                 TaskName = t.TaskName,
                 Time = t.Time.ToString(@"hh\:mm"),
+                Category = t.Category,
+                Priority = t.Priority,
                 IsCompleted = completions.Any(c => c.TemplateId == t.Id && c.IsCompleted)
-            });
+            }).AsEnumerable();
+
+            if (completed.HasValue)
+            {
+                result = result.Where(r => r.IsCompleted == completed.Value);
+            }
+
+            result = sortBy switch
+            {
+                "time_desc" => result.OrderByDescending(r => TimeSpan.Parse(r.Time)),
+                "priority" => result.OrderByDescending(r => r.Priority == "High" ? 3 : r.Priority == "Medium" ? 2 : 1),
+                "created" => result.OrderByDescending(r => r.Id),
+                _ => result.OrderBy(r => TimeSpan.Parse(r.Time)) // default time_asc
+            };
+
+            return result;
         }
 
         public async Task<bool> CompleteTaskAsync(int userId, int templateId)

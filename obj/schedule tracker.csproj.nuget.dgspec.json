@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\parsa\\OneDrive\\Desktop\\kaik che\\schedule tracker\\schedule tracker.csproj": {}
+    "C:\\Users\\parsa\\OneDrive\\Desktop\\main\\kaik che\\schedule tracker\\schedule tracker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\parsa\\OneDrive\\Desktop\\kaik che\\schedule tracker\\schedule tracker.csproj": {
+    "C:\\Users\\parsa\\OneDrive\\Desktop\\main\\kaik che\\schedule tracker\\schedule tracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\parsa\\OneDrive\\Desktop\\kaik che\\schedule tracker\\schedule tracker.csproj",
+        "projectUniqueName": "C:\\Users\\parsa\\OneDrive\\Desktop\\main\\kaik che\\schedule tracker\\schedule tracker.csproj",
         "projectName": "schedule tracker",
-        "projectPath": "C:\\Users\\parsa\\OneDrive\\Desktop\\kaik che\\schedule tracker\\schedule tracker.csproj",
+        "projectPath": "C:\\Users\\parsa\\OneDrive\\Desktop\\main\\kaik che\\schedule tracker\\schedule tracker.csproj",
         "packagesPath": "C:\\Users\\parsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\parsa\\OneDrive\\Desktop\\kaik che\\schedule tracker\\obj\\",
+        "outputPath": "C:\\Users\\parsa\\OneDrive\\Desktop\\main\\kaik che\\schedule tracker\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

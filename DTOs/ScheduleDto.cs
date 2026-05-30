@@ -12,5 +12,8 @@ namespace schedule_tracker.DTOs
 
         [Required]
         public string Time { get; set; } = string.Empty; // Using string to easily handle HH:mm format
+
+        public string Category { get; set; } = "General";
+        public string Priority { get; set; } = "Medium";
     }
 }

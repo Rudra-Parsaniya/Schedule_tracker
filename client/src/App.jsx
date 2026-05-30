@@ -7,6 +7,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Schedule from './pages/Schedule';
+import Calendar from './pages/Calendar';
+import Profile from './pages/Profile';
+import Reminders from './pages/Reminders';
+import Settings from './pages/Settings';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -39,6 +43,38 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Schedule />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/calendar" 
+              element={
+                <ProtectedRoute>
+                  <Calendar />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/reminders" 
+              element={
+                <ProtectedRoute>
+                  <Reminders />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/settings" 
+              element={
+                <ProtectedRoute>
+                  <Settings />
                 </ProtectedRoute>
               } 
             />
